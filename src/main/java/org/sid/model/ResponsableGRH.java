@@ -6,7 +6,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data @NoArgsConstructor
 public class ResponsableGRH extends Utilisateur {
 	
 	@OneToMany
