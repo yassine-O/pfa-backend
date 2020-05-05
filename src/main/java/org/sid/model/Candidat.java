@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("C")
-@Data @NoArgsConstructor
+@Data @NoArgsConstructor 
 public class Candidat extends Utilisateur {
 
 }

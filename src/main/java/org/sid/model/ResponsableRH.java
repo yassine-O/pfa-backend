@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -16,10 +17,13 @@ import lombok.NoArgsConstructor;
 public class ResponsableRH extends Utilisateur {
 	
 	@OneToMany
+	@JoinColumn(name = "code_RH")
 	private List<Categorie> categories = new ArrayList<Categorie>();
 	@OneToMany
-	private List<Teste> testes = new ArrayList<Teste>();
+	@JoinColumn(name = "code_RH")
+	private List<Test> testes = new ArrayList<Test>();
 	@OneToMany
+	@JoinColumn(name = "code_RH")
 	private List<Annonce> annonces = new ArrayList<Annonce>();
 
 }
