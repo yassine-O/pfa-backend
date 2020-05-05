@@ -2,6 +2,8 @@ package org.sid.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -16,8 +18,7 @@ public class Candidat extends Utilisateur {
 	@OneToMany
 	@JoinColumn(name="code_candiddat")
 	List<Entretien> entretiens =new ArrayList<>();
-	@OneToOne
-	@JoinColumn(name="code_candidat")
+	@Embedded
 	private Cv cv;
 	@OneToMany
 	@JoinColumn(name="code_candiddat")
