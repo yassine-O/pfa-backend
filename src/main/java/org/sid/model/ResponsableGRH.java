@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "idResponsableGRH")
+
 public class ResponsableGRH extends Utilisateur {
 	
 	@OneToMany
