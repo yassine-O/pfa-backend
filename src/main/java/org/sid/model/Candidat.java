@@ -2,8 +2,6 @@ package org.sid.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
