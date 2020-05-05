@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@DiscriminatorValue("RH")
 @Data @NoArgsConstructor
 public class ResponsableRH extends Utilisateur {
 	
