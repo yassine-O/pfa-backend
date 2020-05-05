@@ -11,9 +11,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@DiscriminatorValue("GRH")
+@DiscriminatorValue("RH")
 @Data @NoArgsConstructor
-public class ResponsableGRH extends Utilisateur {
+public class ResponsableRH extends Utilisateur {
 	
 	@OneToMany
 	private List<Categorie> categories = new ArrayList<Categorie>();
