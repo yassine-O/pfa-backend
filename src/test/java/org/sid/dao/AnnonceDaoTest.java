@@ -50,8 +50,9 @@ public class AnnonceDaoTest {
 		     Demande demande=new Demande();
 		     Assert.assertEquals(0,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
 		     annonce.addDemande(demande);
+		     annonce.addDemande(demande);
 		     Assert.assertEquals(1,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
-		     
+		     Assert.assertNotEquals(0,demande.getIdDemande());
 	    }
 	    @Test 
 	    public void delete_demande() {
