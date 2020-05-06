@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public abstract class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long idUser;
 	private String nom;
 	private String prenom;
 	private String email;

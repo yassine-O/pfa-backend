@@ -14,6 +14,6 @@ public class Question {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long idQuestion;
 
 }
