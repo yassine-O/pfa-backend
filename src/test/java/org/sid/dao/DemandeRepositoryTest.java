@@ -27,16 +27,16 @@ public class DemandeRepositoryTest  {
 		Demande demande=new Demande() ;
 		demandeRepository.save(demande );
 		long id=demande.getIdDemande();
-		Assert.assertNotNull(demandeRepository.findById(id));
-		Assert.assertNull(demandeRepository.findById(78L));
+		Assert.assertNotNull(demandeRepository.findByIdDemande(id));
+		Assert.assertNull(demandeRepository.findByIdDemande(78L));
 	}
 	public void deleteDemande() {
 		Demande demande=new Demande() ;
 		demandeRepository.save(demande );
 		long id=demande.getIdDemande();
-		Assert.assertNotNull(demandeRepository.findById(id));
+		Assert.assertNotNull(demandeRepository.findByIdDemande(id));
 		demande=null;
-		Assert.assertNotNull(demandeRepository.findById(id));
+		Assert.assertNotNull(demandeRepository.findByIdDemande(id));
 	}
 	
 	

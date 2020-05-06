@@ -30,38 +30,40 @@ public class AnnonceDaoTest {
 	    public void testDelete() {
 	    	Annonce annonce=new Annonce();
 	    	annonceDao.save(annonce);
-	    	long id=annonce.getId();
+	    	long id=annonce.getIdAnnonce();
 	    	annonceDao.deleteById(id);
-	    	Assert.assertNull(annonceDao.findById(id));
+	    	Assert.assertNull(annonceDao.findByIdAnnonce(id));
 	    }
 	    @Test
 	    public void testUpdate() {
 	    	Annonce annonce=new Annonce();
 	    	annonceDao.save(annonce);
-	    	long id=annonce.getId();
+	    	long id=annonce.getIdAnnonce();
 	    	annonce.setMission("mission test");
-	    	Assert.assertEquals("mission test",annonceDao.findById(id).getMission());
+	    	Assert.assertEquals("mission test",annonceDao.findByIdAnnonce(id).getMission());
 	    }
 	    @Test
 	    public void addDemande() {
 	    	 Annonce annonce =new Annonce();
 		     annonceDao.save(annonce);
-		     long idAnnonce =annonce.getId();
+		     long idAnnonce =annonce.getIdAnnonce();
 		     Demande demande=new Demande();
-		     Assert.assertEquals(0,annonceDao.findById(idAnnonce).getDemandes().size());
+		     Assert.assertEquals(0,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
 		     annonce.addDemande(demande);
-		     Assert.assertEquals(1,annonceDao.findById(idAnnonce).getDemandes().size());
+		     Assert.assertEquals(1,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
 		     
 	    }
 	    @Test 
 	    public void delete_demande() {
 	    	Annonce annonce=new Annonce();
 	    	annonceDao.save(annonce);
-	    	long idAnnonce=annonce.getId();
+	    	long idAnnonce=annonce.getIdAnnonce();
 		     Demande demande=new Demande();
-	    	Assert.assertEquals(0,annonceDao.findById(idAnnonce).getDemandes().size());
+		     long idDemande=demande.getIdDemande();
+	    	Assert.assertEquals(0,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
 		     annonce.addDemande(demande);
-		     Assert.assertEquals(1,annonceDao.findById(idAnnonce).getDemandes().size());
+		     Assert.assertEquals(1,annonceDao.findByIdAnnonce(idAnnonce).getDemandes().size());
+		    
 	    	
 	    }
 	   
