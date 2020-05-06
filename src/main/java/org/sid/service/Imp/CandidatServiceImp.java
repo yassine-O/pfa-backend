@@ -31,9 +31,12 @@ public class CandidatServiceImp implements CandidatService{
 		if(annonce==null) {
 			throw new Exception("there is no annonce");
 		}
+		System.out.println("dddddddd"+demande.getIdDemande());
+		demandeRepository.save(demande);
 		annonce.addDemande(demande);
 		annonceRepository.save(annonce);
-		candidat.addDemande(demande);
-		candidatRrepository.save(candidat);
+			System.out.println("dddddddd"+demande.getIdDemande());
+			candidat.addDemande(demande);
+			candidatRrepository.save(candidat);
 	}
 }
