@@ -15,5 +15,6 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idQuestion;
+	private String pathQuestion; 
 
 }

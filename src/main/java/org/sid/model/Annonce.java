@@ -24,6 +24,9 @@ public class Annonce {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idAnnonce;
 	private String mission;
+	private String brefInformation;
+	private String typeConrtat;
+	private String avantage;
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
 	private List<Demande> demandes =new ArrayList<>();

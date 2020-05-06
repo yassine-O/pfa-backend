@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data @NoArgsConstructor
+@Data 
 public class ResponsableRH extends Utilisateur {
 	
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
@@ -26,5 +26,8 @@ public class ResponsableRH extends Utilisateur {
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "code_RH")
 	private List<Annonce> annonces = new ArrayList<Annonce>();
+	public ResponsableRH() {
+		this.setRole("grh");
+	}
 
 }

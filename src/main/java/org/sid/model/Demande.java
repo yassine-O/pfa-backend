@@ -16,4 +16,5 @@ public class Demande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idDemande;
+	private String pathToPresentation;
 }

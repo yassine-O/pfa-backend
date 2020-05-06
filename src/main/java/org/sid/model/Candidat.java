@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data @NoArgsConstructor 
+@Data 
 public class Candidat extends Utilisateur {
 	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_candiddat")
@@ -27,5 +27,8 @@ public class Candidat extends Utilisateur {
 	List<Demande> demandes =new ArrayList<>();
 	public void addDemande(Demande demande) {
 		this.getDemandes().add(demande);
+	}
+	public Candidat() {
+		this.setRole("candidat");
 	}
 }
