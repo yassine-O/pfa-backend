@@ -23,7 +23,7 @@ public class Categorie {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCategorie;
 	private String libelle;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "code_categorie")
 	private List<Question> questions = new ArrayList<Question>();
 

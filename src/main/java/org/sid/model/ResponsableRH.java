@@ -17,13 +17,13 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor
 public class ResponsableRH extends Utilisateur {
 	
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "code_RH")
 	private List<Categorie> categories = new ArrayList<Categorie>();
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "code_RH")
 	private List<Test> testes = new ArrayList<Test>();
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "code_RH")
 	private List<Annonce> annonces = new ArrayList<Annonce>();
 

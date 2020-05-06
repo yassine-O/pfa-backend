@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data @NoArgsConstructor 
 public class Candidat extends Utilisateur {
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_candiddat")
 	List<Entretien> entretiens =new ArrayList<>();
 	@Embedded

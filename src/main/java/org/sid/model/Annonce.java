@@ -24,10 +24,10 @@ public class Annonce {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idAnnonce;
 	private String mission;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
 	private List<Demande> demandes =new ArrayList<>();
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
 	private List<Entretien> entretien =new ArrayList<>();
 	@OneToOne(mappedBy="annonce")
