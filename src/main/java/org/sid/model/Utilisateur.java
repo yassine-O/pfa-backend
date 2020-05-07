@@ -1,5 +1,6 @@
 package org.sid.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,10 @@ public abstract class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUser;
+	private String password;
 	private String nom;
 	private String prenom;
+	@Column(unique=true)
 	private String email;
 	private String role;
 

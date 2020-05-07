@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface EntretienRepository extends JpaRepository<Entretien, Long> {
-	Entretien findById(long id);
+	Entretien findByIdEntretien(long id);
 
 }
