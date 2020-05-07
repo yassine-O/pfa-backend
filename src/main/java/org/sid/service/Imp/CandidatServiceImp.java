@@ -39,4 +39,9 @@ public class CandidatServiceImp implements CandidatService{
 			candidat.addDemande(demande);
 			candidatRrepository.save(candidat);
 	}
+	public void deleteDemande(long idDemande) {
+		Demande demande =new Demande();
+		demande.setIdDemande(idDemande);
+		demandeRepository.delete(demande);
+	}
 }
