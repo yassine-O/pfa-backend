@@ -6,8 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
-
-	Annonce findByIdAnnonce(long idAnnonce);
 	
-
 }
