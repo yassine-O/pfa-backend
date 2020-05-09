@@ -17,6 +17,7 @@ public class PfaApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PfaApplication.class, args);
+		
 	}
 
 	@Override
