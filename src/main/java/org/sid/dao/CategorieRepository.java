@@ -6,5 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface CategorieRepository extends JpaRepository<Categorie, Long> {
-
+		public Categorie findByIdCategorie(long id);
 }

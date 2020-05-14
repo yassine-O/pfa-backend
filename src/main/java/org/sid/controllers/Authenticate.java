@@ -1,5 +1,7 @@
 package org.sid.controllers;
 
+import org.sid.dao.UserDao;
+import org.sid.model.Utilisateur;
 import org.sid.security.AuthenticationRequest;
 import org.sid.security.AuthenticationResponse;
 import org.sid.security.JwtUtil;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,27 +29,51 @@ public class Authenticate {
 	@Autowired
 	MyUserDetailService userDetailService;
 	@Autowired
+	UserDao userDao;
+	@Autowired
 	JwtUtil jwtTokenUtil;
 	@CrossOrigin(allowedHeaders ="*",origins ="*")
-	@GetMapping("/hello")
+	/*@GetMapping("/hello")
 	public ResponseEntity<?> hello() {
-		
+		was a hello world for testing
 		return ResponseEntity.ok(new AuthenticationResponse("hello"));
-	}
+	}*/
 	@PostMapping("/authenticate")
 	public ResponseEntity<?>  authenticate(@RequestBody AuthenticationRequest au) throws Exception {
 		try {
 		
 		m.authenticate(new UsernamePasswordAuthenticationToken(au.getUsername(), au.getPassword()));
-	}catch(Exception z) {
+	}catch(AuthenticationException e) {
+		System.out.println(e.getMessage()+"  authentication");
 		return new ResponseEntity<>(
-				"error", 
+				"password or email incorrect", 
+		          HttpStatus.UNAUTHORIZED);
+	}
+	catch(Exception z) {
+		System.out.println(z);
+		return new ResponseEntity<>(
+				"an error occcured please try again", 
 		          HttpStatus.UNAUTHORIZED);
 	
 	}
-		final UserDetails userDetail=userDetailService.loadUserByUsername(au.getUsername());
-		final String jwt=jwtTokenUtil.generateToken(userDetail);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		final Utilisateur user=userDao.findByEmail(au.getUsername());
+		final String jwt=jwtTokenUtil.generateToken(user);
+		return ResponseEntity.ok(new AuthenticationResponse(jwt,user.getRole()));
+	}
+	@PostMapping("/validate")
+	public  ResponseEntity<?>  validate(@RequestBody String jwtToken){
+		try {
+			System.out.println(jwtToken);
+			String username=  jwtTokenUtil.extractUsername(jwtToken);
+			Utilisateur userDetails = userDao.findByEmail(username);
+			return  ResponseEntity.ok(jwtTokenUtil.validateToken(jwtToken, userDetails.getEmail()));
+			
+		}catch(io.jsonwebtoken.MalformedJwtException ex) {
+			
+
+			return  ResponseEntity.ok(false);
+		}
+		
 	}
 	
 }

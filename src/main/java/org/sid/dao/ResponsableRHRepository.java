@@ -6,5 +6,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface ResponsableRHRepository extends JpaRepository<ResponsableRH, Long> {
-
+		public ResponsableRH findByEmail(String email);
+		
+		
 }

@@ -1,9 +1,11 @@
 package org.sid.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,10 +25,6 @@ public class Annonce {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idAnnonce;
-	private String mission;
-	private String brefInformation;
-	private String typeConrtat;
-	private String avantage;
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
 	private List<Demande> demandes =new ArrayList<>();
@@ -39,4 +37,17 @@ public class Annonce {
 	public void addDemande(Demande d) {
 		this.getDemandes().add(d);
 	}
+	Date date;
+    
+    String title;
+    @org.hibernate.annotations.Type( type = "text" )
+    String description;
+    String profileRecherche;
+    String avantages;
+    int salaireMin;
+    int salaireMax;
+    String typeDeContrat;
+    String nomDeSociete;
+    String niveauEtude;
+    String ville;
 }

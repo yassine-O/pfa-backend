@@ -38,7 +38,9 @@ public class SecuityConfigures extends WebSecurityConfigurerAdapter{
 		http.cors();
 		http.csrf().disable().authorizeRequests().
 			antMatchers("/authenticate").permitAll().
-			antMatchers("/save").permitAll().
+			antMatchers("/save/candidat").permitAll().
+			antMatchers("/save/grh").permitAll().
+			antMatchers("/validate").permitAll().
 			antMatchers("/hello").access("hasRole('ROLE_grh')").
 			anyRequest().authenticated()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

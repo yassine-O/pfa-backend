@@ -29,5 +29,11 @@ public class ResponsableRH extends Utilisateur {
 	public ResponsableRH() {
 		this.setRole("grh");
 	}
+	public  void addAnnonce(Annonce annonce) {
+		this.annonces.add(annonce);
+	}
+	public void addCategorie(Categorie categorie) {
+		this.categories.add(categorie);
+	}
 
 }

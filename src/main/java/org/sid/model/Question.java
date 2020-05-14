@@ -14,7 +14,10 @@ public class Question {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idQuestion;
-	private String pathQuestion; 
+	private Long idQuestion;
+	private String titre;
+	private int durationResponse;
+	@org.hibernate.annotations.Type( type = "text" )
+	private String description;
 
 }
