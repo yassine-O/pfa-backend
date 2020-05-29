@@ -16,6 +16,10 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 			  value = "SELECT * FROM annonce where code_rh=:id", 
 			  nativeQuery = true)
 	public Page<Annonce> findGrhAnnonces(@Param("id") long id,Pageable pageable);
+	@Query(
+			  value = "SELECT * FROM annonce where code_rh=:idGrh and id_annonce=:idAnnonce", 
+			  nativeQuery = true)
+	Annonce getAnnonceByIdGrh__andIdAnnonce(@Param("idGrh") long idUser,@Param("idAnnonce") long idAnnonce);
 	
 
 }

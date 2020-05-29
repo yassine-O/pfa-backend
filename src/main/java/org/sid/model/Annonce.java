@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,12 +29,15 @@ public class Annonce {
 	private long idAnnonce;
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
+	@JsonIgnore
 	private List<Demande> demandes =new ArrayList<>();
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name="code_annonce")
+	@JsonIgnore
 	private List<Entretien> entretien =new ArrayList<>();
 	@OneToOne(mappedBy="annonce")
 	@JoinColumn(name="code_annonce")
+	@JsonIgnore
 	private Test test;
 	public void addDemande(Demande d) {
 		this.getDemandes().add(d);
@@ -43,6 +48,7 @@ public class Annonce {
     @org.hibernate.annotations.Type( type = "text" )
     String description;
     String profileRecherche;
+    @org.hibernate.annotations.Type( type = "text" )
     String avantages;
     int salaireMin;
     int salaireMax;
@@ -50,4 +56,8 @@ public class Annonce {
     String nomDeSociete;
     String niveauEtude;
     String ville;
+	public void addEntretien(Entretien entretien2) {
+		this.entretien.add(entretien2);
+		
+	}
 }

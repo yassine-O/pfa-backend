@@ -9,5 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 public interface UserDao extends JpaRepository<Utilisateur, Long> {
 		//because what we care about is id and role for authentification
-		public ResponsableRH findByEmail(String email);
+		public Utilisateur findByEmail(String email);
+		
 }

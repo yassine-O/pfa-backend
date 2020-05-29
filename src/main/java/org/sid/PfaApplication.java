@@ -9,11 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class PfaApplication implements CommandLineRunner {
-	@Autowired
-	AnnonceRepository a;
-	@Autowired
-	CandidatRepository c;
-	@Autowired
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(PfaApplication.class, args);

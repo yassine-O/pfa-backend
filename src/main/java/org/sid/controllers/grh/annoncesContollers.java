@@ -68,4 +68,18 @@ public class annoncesContollers {
 				.status(200)
 				.build();
 	}
+	@GetMapping("/annonce/{idAnnonce}")
+	public ResponseEntity getAnnonce(@PathVariable long idAnnonce,
+			@RequestHeader(value="Authorization") String authorizationHeader){
+		 String email = authorizationService.getConnectedUserName(authorizationHeader);
+		 Annonce annonce=grhService.getAnnoonceOfGrh(email,idAnnonce);
+		 if(annonce==null) {
+			 return ResponseEntity.
+					 status(404)
+					 .build();
+		 }
+		 return ResponseEntity.ok()
+					.body(annonce);
+			
+		}
 }

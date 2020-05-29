@@ -1,15 +1,18 @@
 package org.sid.service.Imp;
 
 import java.lang.annotation.Target;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.sid.dao.AnnonceRepository;
 import org.sid.dao.CandidatRepository;
 import org.sid.dao.DemandeRepository;
+import org.sid.dao.TestRepository;
 import org.sid.model.Annonce;
 import org.sid.model.Candidat;
 import org.sid.model.Demande;
 import org.sid.model.Entretien;
+import org.sid.model.Question;
 import org.sid.model.Test;
 import org.sid.service.CandidatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,18 @@ import org.springframework.stereotype.Service;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import videos.VideoService;
 @Service
 public class CandidatServiceImp implements CandidatService{
+	VideoService v=new VideoService();
 	@Autowired
 	CandidatRepository candidatRrepository;
 	@Autowired
 	DemandeRepository demandeRepository;
 	@Autowired
 	AnnonceRepository annonceRepository;
+	@Autowired
+	TestRepository testDao;
 	public void addDemande(long annonceId,Demande demande,Candidat candidat)throws Exception {
 		Annonce annonce=annonceRepository.findByIdAnnonce(annonceId);
 		if(annonce==null) {
@@ -43,5 +50,15 @@ public class CandidatServiceImp implements CandidatService{
 		Demande demande =new Demande();
 		demande.setIdDemande(idDemande);
 		demandeRepository.delete(demande);
+	}
+	@Override
+	public void createEntretien(long idEntretien, long idTest) {
+		Test test=testDao.findByIdTest(idTest);
+		List<Long> idQuestions=new ArrayList<Long>();
+		test.getQuestions().forEach((question)->{
+			idQuestions.add(question.getIdQuestion());
+		});
+		this.v.createEntretien(idEntretien, idQuestions);
+		
 	}
 }

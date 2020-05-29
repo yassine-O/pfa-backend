@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.sid.dao.UserDao;
-import org.sid.model.ResponsableRH;
+import org.sid.model.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +22,7 @@ public class MyUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		ResponsableRH user=userdao.findByEmail(email);
+		Utilisateur user=userdao.findByEmail(email);
 		  List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 
 	        list.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));

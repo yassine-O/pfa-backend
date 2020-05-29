@@ -32,7 +32,7 @@ public class Commun {
 	
 	@Autowired
 	JwtUtil jwtTokenUtil;
-	@PostMapping("/save/grh")
+	@PostMapping("/grh")
 	public ResponseEntity<?> saveUser(@RequestBody ResponsableRH grh){
 		System.out.println("saving grh");
 		//GRH is a candidat with entrprise name
@@ -52,7 +52,7 @@ public class Commun {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt,grh.getRole()));
 		
 	}
-	@PostMapping("/save/candidat")
+	@PostMapping("/candidat")
 	public ResponseEntity<?> saveCandidat(@RequestBody Candidat candidat){
 		System.out.println("saving grh");
 		//GRH is a candidat with entrprise name

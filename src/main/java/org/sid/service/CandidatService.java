@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
 
 public interface CandidatService {
 	public void addDemande(long annonceId,Demande demande,Candidat candidat) throws Exception;
-	
+	public void createEntretien(long idEntretien, long idTest);
 }

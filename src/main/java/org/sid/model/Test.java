@@ -30,4 +30,8 @@ public class Test {
 	@OneToOne
 	@JoinColumn(name="code_annonce")
 	Annonce annonce;
+	public String toString() {
+		return "";
+		
+	}
 }

@@ -1,10 +1,17 @@
 package org.sid.controllers.grh;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.sid.dao.CategorieRepository;
 import org.sid.dao.QuestionRepository;
 import org.sid.dao.ResponsableRHRepository;
+import org.sid.model.Annonce;
 import org.sid.model.Categorie;
 import org.sid.model.Question;
 import org.sid.model.mapper.CategorieMapper;
@@ -12,6 +19,9 @@ import org.sid.service.GrhService;
 import org.sid.service.Imp.AuthorizationServiceImp;
 import org.sid.service.Imp.GrhServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +40,7 @@ import videos.VideoService;
 @RestController
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 public class QuestionsControllors {
+	
 	VideoService  v=new VideoService();
 	@Autowired
 	ResponsableRHRepository grhdao;
@@ -103,4 +114,62 @@ public class QuestionsControllors {
 		
 	}
 	
+	@GetMapping("/questions/{idCategory}") ResponseEntity getQuestionOfCategory(
+			@PathVariable long idCategory,
+			@RequestParam(value="page") int page,
+			@RequestHeader(value="Authorization") String authorization) {
+		String email=this.authorizationService.getConnectedUserName(authorization);
+		List questions_nombrePages=this.grhService.getQuestionByCategory(idCategory,page-1,email);
+		 
+			List<Question> questions=(List<Question>)questions_nombrePages.get(0);
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.add("page",questions_nombrePages.get(1).toString());
+			responseHeaders.add("Access-Control-Expose-Headers","page");
+			return  ResponseEntity.ok()
+					.headers(responseHeaders)
+					.body(questions)
+					;
+		
+	}
+	@GetMapping("/watch/{idQuestion}")
+	public ResponseEntity<byte[]> getVideo( 
+		     @RequestHeader(value = "Range", required = false) String range,
+		     @PathVariable String idQuestion
+		     )throws IOException {
+		 ResponseEntity<byte[]> result = null;
+		 try {
+			
+			String[] ranges = range.substring("bytes=".length()).split("-");//Range : bytes=xxxxxxx- or bytes=xxxxxx-xxxxxx
+	       	long from = Integer.valueOf(ranges[0]);
+	       	HashMap<String, byte[]> fileSize_videoRange =this.v.getVideoRange("question", idQuestion, from);
+	       	byte[] videoRange= {};
+	       	long fileSize=0;
+	       	long readed=0;
+	       	for ( String key : fileSize_videoRange.keySet() ) {
+	       		
+	       		String[] readed_size=key.split("-");
+	       		fileSize=Long.parseLong(readed_size[1]);
+	       		readed=Long.parseLong(readed_size[0]);
+	       	   videoRange=fileSize_videoRange.get(key);
+	       	  
+	       	}
+	    	HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.valueOf("video/mp4"));
+	        System.out.println(range.substring("bytes=".length())+" susbstring");
+	       	headers.set("Accept-Ranges","bytes");
+			headers.set("Content-Range","bytes "+from+"-"+(from+readed+1)+"/"+fileSize+1);
+			System.out.println(((fileSize+1))+"file size");
+			System.out.println((from+readed+1)<fileSize);
+			headers.setContentLength(readed);
+			result = new ResponseEntity<byte[]>(videoRange, headers, HttpStatus.PARTIAL_CONTENT);
+	        
+	    } catch (java.nio.file.NoSuchFileException e) {
+	        //response.setStatus(HttpStatus.NOT_FOUND.value());
+	    } catch (Exception e) {
+	       // response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+	    }
+	    return result;
+		
+		
+	}
 }

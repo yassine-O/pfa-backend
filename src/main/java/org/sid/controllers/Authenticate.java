@@ -41,7 +41,7 @@ public class Authenticate {
 	@PostMapping("/authenticate")
 	public ResponseEntity<?>  authenticate(@RequestBody AuthenticationRequest au) throws Exception {
 		try {
-		
+		System.out.println(au.getPassword()+au.getUsername());
 		m.authenticate(new UsernamePasswordAuthenticationToken(au.getUsername(), au.getPassword()));
 	}catch(AuthenticationException e) {
 		System.out.println(e.getMessage()+"  authentication");
@@ -66,7 +66,8 @@ public class Authenticate {
 			System.out.println(jwtToken);
 			String username=  jwtTokenUtil.extractUsername(jwtToken);
 			Utilisateur userDetails = userDao.findByEmail(username);
-			return  ResponseEntity.ok(jwtTokenUtil.validateToken(jwtToken, userDetails.getEmail()));
+			System.out.println(userDetails.getEmail());
+			return  ResponseEntity.ok(new AuthenticationResponse("notImportant",userDetails.getRole()));
 			
 		}catch(io.jsonwebtoken.MalformedJwtException ex) {
 			

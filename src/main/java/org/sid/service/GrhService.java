@@ -22,4 +22,8 @@ public interface GrhService {
 	public List<CategorieMapper> fetchCatgories(String email);
 
 	public Question updateQuestion(Question question, long idCategory);
+
+	public Annonce getAnnoonceOfGrh(String email, long idAnnonce);
+
+	public List getQuestionByCategory(long idCategory, int page,String email);
 }

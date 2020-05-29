@@ -122,5 +122,23 @@ public class GrhServiceImp implements GrhService {
 		
 		return question;
 	}
+	@Override
+	public Annonce getAnnoonceOfGrh(String email, long idAnnonce) {
+		ResponsableRH grh=grhDao.findByEmail(email);
+		Annonce annonce =annonceDao.getAnnonceByIdGrh__andIdAnnonce(grh.getIdUser(),idAnnonce);
+		return annonce;
+	}
+	@Override
+	public List getQuestionByCategory(long idCategory, int page,String email) {
+		// TODO Auto-generated method stub
+		//ResponsableRH grh=grhDao.findByEmail(email);
+		Pageable p=PageRequest.of(page, 13);
+		Page<Question> questions=questionDao.findQuestionByCatgorie(idCategory,p);
+		List pageAnnonce=new ArrayList();
+		pageAnnonce.add(0,questions.getContent());
+		pageAnnonce.add(1,questions.getTotalPages());
+		
+		return pageAnnonce;
+	}
 
 }
