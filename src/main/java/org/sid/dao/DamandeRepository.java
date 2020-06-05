@@ -1,11 +1,11 @@
 package org.sid.dao;
 
 import org.sid.model.Demande;
+import org.sid.model.Demande_PK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
+public interface DamandeRepository extends JpaRepository<Demande, Demande_PK> {
 
-public interface DemandeRepository extends JpaRepository<Demande,Long>{
-	Demande findByIdDemande(long id);
 }

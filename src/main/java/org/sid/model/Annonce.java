@@ -3,15 +3,13 @@ package org.sid.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,21 +20,25 @@ public class Annonce {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idAnnonce;
+	private long id;
+	
 	private String mission;
+	
 	private String brefInformation;
+	
 	private String typeConrtat;
+	
 	private String avantage;
-	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
-	@JoinColumn(name="code_annonce")
-	private List<Demande> demandes =new ArrayList<>();
-	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true, fetch = FetchType.LAZY)
-	@JoinColumn(name="code_annonce")
-	private List<Entretien> entretien =new ArrayList<>();
-	@OneToOne(mappedBy="annonce")
-	@JoinColumn(name="code_annonce")
+	
+	@ManyToOne
+	@JoinColumn(name="code_test")
 	private Test test;
-	public void addDemande(Demande d) {
-		this.getDemandes().add(d);
-	}
+	
+	@OneToMany(mappedBy = "pk.annonce")
+	private List<Demande> demandes =new ArrayList<>();
+	
+	@OneToMany(mappedBy = "pk.annonce")
+	private List<Entretien> entretiens =new ArrayList<>();
+	
+	
 }

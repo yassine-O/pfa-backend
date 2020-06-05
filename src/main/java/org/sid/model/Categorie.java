@@ -3,9 +3,7 @@ package org.sid.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,9 +19,11 @@ public class Categorie {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idCategorie;
+	private long id;
+	
 	private String libelle;
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+	
+	@OneToMany
 	@JoinColumn(name = "code_categorie")
 	private List<Question> questions = new ArrayList<Question>();
 

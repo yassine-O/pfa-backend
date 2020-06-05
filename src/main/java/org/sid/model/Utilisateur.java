@@ -13,13 +13,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data @NoArgsConstructor
-public abstract class Utilisateur {
+public class Utilisateur {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idUser;
+	
 	private String nom;
+	
 	private String prenom;
+	
 	private String email;
+	
+	private String password;
+	
 	private String role;
 
 }
