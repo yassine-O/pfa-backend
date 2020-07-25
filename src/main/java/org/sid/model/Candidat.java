@@ -20,7 +20,7 @@ public class Candidat extends Utilisateur {
 	
 	
 	public Candidat() {
-		this.setRole("candidat");
+		this.setRole("CANDIDAT");
 	}
 	
 }

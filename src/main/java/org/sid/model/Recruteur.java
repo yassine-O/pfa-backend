@@ -6,12 +6,17 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
 @Entity
 @Data 
-public class ResponsableRH extends Utilisateur {
+public class Recruteur extends Utilisateur {
+	
+	@OneToOne
+	@JoinColumn(name = "code_entreprise")
+	private Entreprise entreprise;
 	
 	@OneToMany
 	@JoinColumn(name = "code_RH")
@@ -26,8 +31,8 @@ public class ResponsableRH extends Utilisateur {
 	private List<Annonce> annonces = new ArrayList<Annonce>();
 	
 	
-	public ResponsableRH() {
-		this.setRole("grh");
+	public Recruteur() {
+		this.setRole("RECRUTEUR");
 	}
 
 }
