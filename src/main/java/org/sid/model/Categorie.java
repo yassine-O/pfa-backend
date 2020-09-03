@@ -30,5 +30,10 @@ public class Categorie {
 	@JoinColumn(name = "code_categorie")
 	@JsonIgnore
 	private List<Question> questions = new ArrayList<Question>();
+	
+	
+	public void addQuestion(Question question) {
+		this.questions.add(question);
+	}
 
 }

@@ -29,7 +29,7 @@ public class Annonce {
 	
 	private String descriptionPoste;
 	
-	private String typeConrtat;
+	private String typeContrat;
 		
 	private String niveauEtude;
 	
@@ -39,8 +39,11 @@ public class Annonce {
 	
 	private LocalDate datePublication;
 	
-	@ManyToMany
-	private List<AnnonceCategorie> listCategories = new ArrayList<>();
+	private String statut;
+	
+	@ManyToOne
+	@JoinColumn(name="code_domaine")
+	private Domaine domaine;
 	
 	@OneToOne
 	@JoinColumn(name = "code_entreprise")
@@ -51,10 +54,10 @@ public class Annonce {
 	private Test test;
 	
 	@OneToMany(mappedBy = "pk.annonce")
-	private List<Demande> demandes =new ArrayList<>();
+	private List<Demande> demandes = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "pk.annonce")
-	private List<Entretien> entretiens =new ArrayList<>();
+	private List<Entretien> entretiens = new ArrayList<>();
 	
 	
 }

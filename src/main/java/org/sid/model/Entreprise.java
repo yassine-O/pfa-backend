@@ -17,12 +17,12 @@ public class Entreprise {
 	private long id;
 	
 	private String nom;
-	
-	private String description;
-	
+			
 	private String secteurActivite;
 	
 	private String siegeSocial;
+	
+	private String dateFondation;
 	
 	private String siteWeb;
 

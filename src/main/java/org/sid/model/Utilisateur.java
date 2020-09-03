@@ -27,6 +27,8 @@ public class Utilisateur {
 	
 	private String password;
 	
+	private String telephone;
+	
 	private String role;
 
 }
